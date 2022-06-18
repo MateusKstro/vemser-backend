@@ -6,7 +6,7 @@ public class Exercicio9 {
         Locale.setDefault(Locale.US);
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Quantos você tem? ");
+        System.out.println("Quantos anos você tem? ");
         int anos = scanner.nextInt();
         int meses = anos * 12;
         int dias  = anos * 365;

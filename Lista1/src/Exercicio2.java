@@ -9,7 +9,7 @@ public class Exercicio2 {
         System.out.println("Informe a nota: ");
         Double nota = scanner.nextDouble();
 
-        if (nota >= 0 && nota <= 5) {
+        if (nota > 0 && nota <= 5) {
             System.out.println("aluno reprovado.");
         }
         else if (nota > 5 && nota < 7){

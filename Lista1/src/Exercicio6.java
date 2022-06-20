@@ -60,5 +60,6 @@ public class Exercicio6 {
                 System.out.println("Essa palavra não é valida.");
             }
         }
+    scanner.close();
     }
 }

@@ -19,5 +19,6 @@ public class Exercicio3 {
             double troco = valorCliente - valorTotal;
             System.out.println("O troco do cliente é de R$" + troco);
         }
+    scanner.close();
     }
 }

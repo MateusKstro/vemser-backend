@@ -21,5 +21,6 @@ public class Exercicio2 {
         else {
             System.out.println("essa nota é invalida.");
         }
+        scanner.close();
     }
 }

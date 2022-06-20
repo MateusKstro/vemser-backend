@@ -36,5 +36,6 @@ public class Exercicio10 {
             System.out.println("Total de votos válidos foi de: " + votoValido);
             System.out.println("Percentual de votos válidos:" + (votoValido * 100)/totalEleitores + "%");
         }
+    scanner.close();
     }
 }

@@ -8,9 +8,17 @@ public class Exercicio9 {
 
         System.out.println("Quantos anos você tem? ");
         int anos = scanner.nextInt();
-        int meses = anos * 12;
-        int dias  = anos * 365;
+        scanner.nextLine();
 
-        System.out.println("Você já viveu um total de " + dias + " dias!!");
+        System.out.println("Quantos meses?");
+        int meses = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Quantos dias?");
+        int dias = scanner.nextInt();
+
+        System.out.println("Você já viveu um total de " + (365*anos + meses*30 + dias) + " dias!!");
+
+    scanner.close();
     }
 }

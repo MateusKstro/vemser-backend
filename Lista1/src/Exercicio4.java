@@ -61,5 +61,6 @@ public class Exercicio4 {
                 System.out.println("Número inválido.");
             }
         }
+      scanner.close();
      }
 }

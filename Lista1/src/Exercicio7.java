@@ -16,5 +16,6 @@ public class Exercicio7 {
 
         System.out.println("Valor de A = " + A + ", Valor de B = " + B);
 
+    scanner.close();
     }
 }

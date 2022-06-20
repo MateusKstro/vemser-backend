@@ -15,5 +15,7 @@ public class Exercicio8 {
         double area = base * altura;
 
         System.out.printf("A área do retângulo é : %.2f%n", area);
+
+    scanner.close();
     }
 }

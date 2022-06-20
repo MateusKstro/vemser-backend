@@ -5,13 +5,13 @@ public class Exercicio10 {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Número de votos em branco: ");
-        int votoBranco = scanner.nextInt();
+        double votoBranco = scanner.nextInt();
         System.out.println("Número de votos nulos:");
-        int votoNulo = scanner.nextInt();
+        double votoNulo = scanner.nextInt();
         System.out.println("Número de votos válidos:");
-        int votoValido = scanner.nextInt();
+        double votoValido = scanner.nextInt();
 
-        int totalEleitores = votoBranco + votoNulo + votoValido;
+        double totalEleitores = votoBranco + votoNulo + votoValido;
 
         System.out.println("Total de eleitores: " + totalEleitores);
 

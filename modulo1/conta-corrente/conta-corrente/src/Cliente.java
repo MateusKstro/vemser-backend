@@ -16,12 +16,16 @@ public class Cliente {
 
     void imprimirContatos(){
         for(int i = 0; i < contatos.length; i++){
-            contatos[i].imprimirContato();
+            if (contatos[i] != null){
+                contatos[i].imprimirContato();
+            }
         }
     }
     void imprimirEnderecos(){
         for(int i = 0; i < enderecos.length; i++){
-            enderecos[i].imprimirEndereco();
+            if(enderecos[i] != null) {
+                enderecos[i].imprimirEndereco();
+            }
         }
     }
     void imprimirCliente(){

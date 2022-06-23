@@ -1,4 +1,4 @@
-public abstract class Conta implements Movimentacao{
+public abstract class Conta implements Movimentacao {
 
     private Cliente cliente;
 
@@ -37,9 +37,9 @@ public abstract class Conta implements Movimentacao{
         }
     }
 
-    @Override
     public boolean transferir(Conta conta, double valorTranferido) {
-        if((valorTranferido <= 0) || (this.saldo - valorTranferido) > 0) {
+        if((valorTranferido <= 0) || (this.saldo < 0)) {
+            System.out.println("Nao foi possivel realizar o tranferencia.");
             return false;
         } else {
             this.saldo -= valorTranferido;

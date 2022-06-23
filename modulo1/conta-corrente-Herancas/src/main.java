@@ -30,11 +30,17 @@ public class main {
 
 
 
+
+
         System.out.println("=================================================");
         System.out.println("Realizando tranferencia entre contas:");
         contaCorrenteCliente1.transferir(contaCorrenteCliente2, 600);
         System.out.println("Seu saldo atualizado: R$" + contaCorrenteCliente1.getSaldo());
         System.out.println("=================================================");
+        System.out.println("Realizando saque da conta :");
+        contaCorrenteCliente2.sacarDinheiro(200);
+        System.out.println("Saldo atualizado apos o saque: R$" + contaCorrenteCliente2.getSaldo());
+        System.out.println("================================================");
 
         System.out.println("Conta cliente1: ");
         contaCorrenteCliente1.imprimir();

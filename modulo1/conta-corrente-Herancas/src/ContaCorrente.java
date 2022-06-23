@@ -19,18 +19,30 @@ public class ContaCorrente extends Conta implements Impressao{
 
 
     public boolean sacarDinheiro(double valorSaque){
-        if (valorSaque > (super.getSaldo() + this.chequeEspecial) || valorSaque <= 0){
+        if (valorSaque > (this.getSaldo() + this.chequeEspecial) || valorSaque <= 0){
             System.out.println("Nao foi possivel sacar seu dinheiro.");
             return false;
         } else {
-            super.setSaldo(getSaldo() + valorSaque);
+            super.setSaldo(getSaldo() - valorSaque);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean transferir(Conta conta, double valorTranferido) {
+        if((valorTranferido <= 0) || (this.getSaldo() - valorTranferido + chequeEspecial < 0)) {
+            System.out.println("Nao foi possivel realizar o tranferencia.");
+            return false;
+        } else {
+            this.setSaldo(this.getSaldo() - valorTranferido);
+            conta.setSaldo(this.getSaldo() + valorTranferido);
             return true;
         }
     }
 
 
     public double retornarSaldoComChequeEspecial(){
-        return super.getSaldo() + this.chequeEspecial;
+        return this.getSaldo() + this.chequeEspecial;
     }
 
 

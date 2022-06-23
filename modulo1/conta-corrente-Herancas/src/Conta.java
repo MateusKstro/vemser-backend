@@ -39,7 +39,7 @@ public abstract class Conta implements Movimentacao {
 
 
     public boolean transferir(Conta conta, double valorTranferido) {
-        if((valorTranferido <= 0) && (valorTranferido + saldo < 0)) {
+        if((valorTranferido <= 0) && ((saldo - valorTranferido) < 0)) {
             System.out.println("Nao foi possivel realizar a tranferencia.");
             return false;
         } else {

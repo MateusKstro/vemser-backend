@@ -2,9 +2,6 @@ public class ContaCorrente extends Conta implements Impressao{
 
     private double chequeEspecial;
 
-    public double getChequeEspecial() {
-        return chequeEspecial;
-    }
 
     public void setChequeEspecial(double chequeEspecial) {
         this.chequeEspecial = chequeEspecial;
@@ -15,41 +12,26 @@ public class ContaCorrente extends Conta implements Impressao{
         this.chequeEspecial = chequeEspecial;
     }
 
-
-
-
-    public boolean sacarDinheiro(double valorSaque){
-        if (valorSaque > (this.getSaldo() + this.chequeEspecial) || valorSaque <= 0){
-            System.out.println("Nao foi possivel sacar seu dinheiro.");
-            return false;
-        } else {
-            super.setSaldo(getSaldo() - valorSaque);
-            return true;
-        }
-    }
-
     @Override
-    public boolean transferir(Conta conta, double valorTranferido) {
-        if((valorTranferido <= 0) || (this.getSaldo() - valorTranferido + chequeEspecial < 0)) {
-            System.out.println("Nao foi possivel realizar o tranferencia.");
-            return false;
-        } else {
-            this.setSaldo(this.getSaldo() - valorTranferido);
-            conta.setSaldo(this.getSaldo() + valorTranferido);
+    public boolean sacar(double valorSaque) {
+        if(valorSaque > 0 && valorSaque <= this.retornarSaldoComChequeEspecial()){
+            this.setSaldo(this.getSaldo() - valorSaque);
             return true;
+        } else {
+            return false;
         }
     }
-
 
     public double retornarSaldoComChequeEspecial(){
-        return this.getSaldo() + this.chequeEspecial;
+        double saldoTotal = this.getSaldo() + this.chequeEspecial;
+        return saldoTotal;
     }
 
 
 
     @Override
     public void imprimir() {
-        System.out.println("O numero da conta: " + getNumeroConta() + "ag: " + getAgencia() + " com saldo: R$" + getSaldo() + " Cheque especial: R$" + getChequeEspecial());
+        System.out.println("O numero da conta: " + getNumeroConta() + "ag: " + getAgencia() + " com saldo: R$" + getSaldo() + " Cheque especial: R$" + chequeEspecial);
         getCliente().imprimirCliente();
     }
 }

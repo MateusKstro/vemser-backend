@@ -15,36 +15,36 @@ public abstract class Conta implements Movimentacao {
         this.saldo = saldo;
     }
 
-    @Override
+
     public boolean depositar(double valorDeposito) {
         if(valorDeposito <= 0 ) {
             System.out.println("Para depositar o valor nao pode ser menor ou igual a R$0.00.");
             return false;
         } else {
-           saldo += valorDeposito;
+           this.setSaldo(getSaldo() + valorDeposito);
            return true;
         }
     }
 
-    @Override
+
     public boolean sacar(double valorSaque) {
         if(valorSaque > saldo || valorSaque <= 0) {
             System.out.println("Valor para saque nao pode ser menor ou igual a R$0.00.");
             return false;
         } else {
-            valorSaque -= saldo;
+            this.setSaldo(this.getSaldo() - valorSaque);;
             return true;
         }
     }
 
+
     public boolean transferir(Conta conta, double valorTranferido) {
-        if((valorTranferido <= 0) || (this.saldo < 0)) {
-            System.out.println("Nao foi possivel realizar o tranferencia.");
+        if((valorTranferido <= 0) && (valorTranferido + saldo < 0)) {
+            System.out.println("Nao foi possivel realizar a tranferencia.");
             return false;
         } else {
-            this.saldo -= valorTranferido;
-            conta.saldo += valorTranferido;
-            return true;
+            this.setSaldo(this.getSaldo() - valorTranferido);
+            return conta.depositar(valorTranferido);
         }
     }
 

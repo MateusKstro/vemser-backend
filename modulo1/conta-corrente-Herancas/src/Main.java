@@ -1,6 +1,6 @@
 
 
-public class main {
+public class Main {
     public static void main(String[] args) {
 
         Contato[] contatosCliente1 = new Contato[2];
@@ -38,7 +38,7 @@ public class main {
         System.out.println("Seu saldo atualizado: R$" + contaCorrenteCliente1.getSaldo());
         System.out.println("=================================================");
         System.out.println("Realizando saque da conta :");
-        contaCorrenteCliente2.sacarDinheiro(200);
+        contaCorrenteCliente2.sacar(200);
         System.out.println("Saldo atualizado apos o saque: R$" + contaCorrenteCliente2.getSaldo());
         System.out.println("================================================");
 

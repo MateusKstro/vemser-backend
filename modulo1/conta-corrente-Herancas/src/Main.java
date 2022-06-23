@@ -34,7 +34,7 @@ public class Main {
 
         System.out.println("=================================================");
         System.out.println("Realizando tranferencia entre contas:");
-        contaCorrenteCliente1.transferir(contaCorrenteCliente2, 600);
+        contaCorrenteCliente1.transferir(contaCorrenteCliente2, 300);
         System.out.println("Seu saldo atualizado: R$" + contaCorrenteCliente1.getSaldo());
         System.out.println("=================================================");
         System.out.println("Realizando saque da conta :");

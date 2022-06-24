@@ -43,7 +43,7 @@ public abstract class Conta implements Movimentacao {
             System.out.println("Nao foi possivel realizar a tranferencia.");
             return false;
         } else {
-            this.setSaldo(this.getSaldo() - valorTranferido);
+            sacar(valorTranferido);
             return conta.depositar(valorTranferido);
         }
     }

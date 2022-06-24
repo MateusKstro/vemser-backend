@@ -1,6 +1,6 @@
-package main.cliente.conta.interfaces;
+package main;
 
-import main.cliente.conta.Conta;
+import main.Conta;
 
 public interface Movimentacao {
 

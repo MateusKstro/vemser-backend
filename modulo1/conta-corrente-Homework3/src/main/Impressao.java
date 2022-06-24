@@ -1,4 +1,4 @@
-package main.cliente.conta.interfaces;
+package main;
 
 public interface Impressao {
     public void imprimir();

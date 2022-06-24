@@ -1,7 +1,4 @@
-package main.cliente.conta;
-
-import main.cliente.Cliente;
-import main.cliente.conta.interfaces.Impressao;
+package main;
 
 public class ContaPoupanca extends Conta implements Impressao {
 

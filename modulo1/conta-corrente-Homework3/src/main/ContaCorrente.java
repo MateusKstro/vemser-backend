@@ -1,7 +1,4 @@
-package main.cliente.conta;
-
-import main.cliente.Cliente;
-import main.cliente.conta.interfaces.Impressao;
+package main;
 
 public class ContaCorrente extends Conta implements Impressao {
 

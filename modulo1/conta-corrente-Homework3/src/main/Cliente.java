@@ -1,12 +1,15 @@
-package main.cliente;
+package main;
+
+import main.Contato;
+import main.Endereco;
 
 import java.util.ArrayList;
 
 public class Cliente {
     private String nome;
     private String cpf;
-    private ArrayList<Contato> contatos = new ArrayList<>();
-    private ArrayList<Endereco> enderecos= new ArrayList<>();
+    private ArrayList<Contato> contatos;
+    private ArrayList<Endereco> enderecos;
 
     public String getNome() {
         return nome;
@@ -47,17 +50,21 @@ public class Cliente {
         this.enderecos = enderecos;
     }
 
-    void imprimirContatos(){
-        for(int i = 0; i < contatos.size(); i++){
-            if (contatos.get(i) != null){
-                contatos.get(i).imprimirContato();
+    void imprimirContatos() {
+        if (contatos != null) {
+            for (int i = 0; i < contatos.size(); i++) {
+                if (contatos != null) {
+                    contatos.get(i).imprimirContato();
+                }
             }
         }
     }
-    void imprimirEnderecos(){
-        for(int i = 0; i < enderecos.size(); i++){
-            if(enderecos.get(i) != null) {
-                enderecos.get(i).imprimirEndereco();
+    void imprimirEnderecos() {
+        if (enderecos != null) {
+            for (int i = 0; i < enderecos.size(); i++) {
+                if (enderecos != null) {
+                    enderecos.get(i).imprimirEndereco();
+                }
             }
         }
     }

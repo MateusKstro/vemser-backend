@@ -1,7 +1,4 @@
-package main.cliente.conta;
-
-import main.cliente.Cliente;
-import main.cliente.conta.interfaces.Movimentacao;
+package main;
 
 public abstract class Conta implements Movimentacao {
 
@@ -48,7 +45,7 @@ public abstract class Conta implements Movimentacao {
             System.out.println("Nao foi possivel realizar a tranferencia.");
             return false;
         } else {
-            this.setSaldo(this.getSaldo() - valorTranferido);
+            sacar(valorTranferido);
             return conta.depositar(valorTranferido);
         }
     }

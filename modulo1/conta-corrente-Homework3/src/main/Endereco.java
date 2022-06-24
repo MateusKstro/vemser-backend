@@ -1,4 +1,4 @@
-package main.cliente;
+package main;
 
 public class Endereco {
     private int tipo;

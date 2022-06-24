@@ -1,11 +1,10 @@
-package main.cliente.conta;
+package main;
 
-import main.cliente.Cliente;
-import main.cliente.conta.interfaces.Impressao;
 
 public class ContaPagamento extends Conta implements Impressao {
 
     private static final double TAXA_SAQUE = 4.25;
+
 
     @Override
     public boolean sacar(double valorSaque) {
@@ -14,6 +13,16 @@ public class ContaPagamento extends Conta implements Impressao {
         } else {
             System.out.println("Valor do saque maior que o saldo disponivel + taxas.");
         } return false;
+    }
+
+    @Override
+    public boolean transferir(Conta conta, double valorTranferido) {
+       if((valorTranferido > 0) && (valorTranferido < this.getSaldo())) {
+           this.setSaldo(this.getSaldo() - valorTranferido);
+           return conta.depositar(valorTranferido);
+       } else {
+          return false;
+       }
     }
 
     public ContaPagamento(Cliente cliente, String numeroConta, String agencia, double saldo) {

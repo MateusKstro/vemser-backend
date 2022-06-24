@@ -1,12 +1,5 @@
 package main;
 
-import main.cliente.Cliente;
-import main.cliente.Contato;
-import main.cliente.Endereco;
-import main.cliente.conta.ContaCorrente;
-import main.cliente.conta.ContaPagamento;
-import main.cliente.conta.ContaPoupanca;
-
 import java.util.ArrayList;
 
 public class Main {
@@ -14,7 +7,7 @@ public class Main {
 
         ArrayList<Contato> contatosCliente1 = new ArrayList<>();
         contatosCliente1.add(new Contato("Celular", "519999-8888", 1));
-        contatosCliente1.add( new Contato("Telefone", "517777-6666", 2));
+        contatosCliente1.add(new Contato("Telefone", "517777-6666", 2));
 
         ArrayList<Contato> contatosCliente2 = new ArrayList<>();
         contatosCliente2.add(new Contato("Celular", "517887-6556", 1));
@@ -56,18 +49,19 @@ public class Main {
         contaPagamentoCliente1.sacar(200);
         System.out.println("Seu saldo atualizado, conta de pagamento: R$" + contaPagamentoCliente1.getSaldo());
         System.out.println("================================================");
+        System.out.println("Realizando tranferencia entre contas:");
+        contaPagamentoCliente1.transferir(contaCorrenteCliente1, 50);
+        System.out.println("Seu saldo atualizado: R$" + contaPagamentoCliente1.getSaldo());
 
-
-
-        System.out.println("main.main.cliente.conta.Conta cliente1: ");
+        System.out.println("==========================================");
+        System.out.println("Conta cliente1: ");
         contaCorrenteCliente1.imprimir();
         System.out.println("==========================================");
-        System.out.println("main.main.cliente.conta.Conta Pagamento Cliente1: ");
+        System.out.println("Conta Pagamento Cliente1: ");
         contaPagamentoCliente1.imprimir();
         System.out.println("==========================================");
-        System.out.println("main.main.cliente.conta.Conta Poupanca cliente2:");
+        System.out.println("Conta Poupanca cliente2:");
         contaPoupancaCliente2.imprimir();
-
 
     }
 }

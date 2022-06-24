@@ -1,4 +1,4 @@
-package main.cliente;
+package main;
 
 public class Contato {
     private String descricao;
@@ -36,7 +36,7 @@ public class Contato {
     }
 
     void imprimirContato(){
-        System.out.println("main.main.cliente.Contato: " + descricao + ": " + telefone + " tipo de contato: " + tipo);
+        System.out.println("main.main.Contato: " + descricao + ": " + telefone + " tipo de contato: " + tipo);
     }
 
 }

@@ -199,7 +199,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"99955876566\",\r\n    \"descricao\": \"whatsapp\"\r\n}",
+							"raw": "{\r\n    \"idPessoa\": 4,\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"99955876566\",\r\n    \"descricao\": \"whatsapp\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

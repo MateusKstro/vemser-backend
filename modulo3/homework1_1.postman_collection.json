@@ -267,7 +267,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"albumId\": 77,\r\n        \"name\": \"id mateus teste photos\",\r\n        \"email\": \"ttukstro@gardner.biz\",\r\n        \"body\": \"seila, teste photos\"\r\n}",
+							"raw": "{\r\n        \"albumId\": 1,\r\n        \"title\": \"Album de fotos teste\",\r\n        \"url\": \"https://www.clickjogos/600/92c952\",\r\n        \"thumbnailUrl\": \"https://fogoeagua/150/92c952\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,7 +296,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"albumId\": 77,\r\n        \"name\": \"id mateus teste photos alterado\",\r\n        \"email\": \"ttukstro@ggmail.biz\",\r\n        \"body\": \"seila, teste photos alterado\"\r\n}",
+							"raw": "{\r\n        \"albumId\": 75,\r\n        \"title\": \"alterando titulo photos\",\r\n        \"url\": \"https://via.sadohghdg/600/92c952\",\r\n        \"thumbnailUrl\": \"https://via.asdhghhe0/92c952\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -304,7 +304,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://jsonplaceholder.typicode.com/photos/50",
+							"raw": "https://jsonplaceholder.typicode.com/photos/1",
 							"protocol": "https",
 							"host": [
 								"jsonplaceholder",
@@ -313,7 +313,7 @@
 							],
 							"path": [
 								"photos",
-								"50"
+								"1"
 							]
 						}
 					},
@@ -495,7 +495,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"name\": \"Cleiton Rasta\",\r\n        \"username\": \"Cabeca de gelo\",\r\n        \"email\": \"ViajaReggeiro@april.com\",\r\n        \"address\": {\r\n            \"street\": \"youtube\",\r\n            \"suite\": \"Apt. 200\",\r\n            \"city\": \"Internet\",\r\n            \"zipcode\": \"99998-3544\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        }\r\n}",
+							"raw": "{\r\n        \"name\": \"MAteus castro\",\r\n        \"username\": \"tetz\",\r\n        \"email\": \"tetzkstro@april.biz\",\r\n        \"address\": {\r\n            \"street\": \"clovis Light\",\r\n            \"suite\": \"Apt. 204\",\r\n            \"city\": \"Cachoeirinha\",\r\n            \"zipcode\": \"95588-3874\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        },\r\n        \"phone\": \"879797892\",\r\n        \"website\": \"castro.org\",\r\n        \"company\": {\r\n            \"name\": \"tezte-Crona\",\r\n            \"catchPhrase\": \"teste catchphrease\",\r\n            \"bs\": \"teste13245\"\r\n        }\r\n    }             ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -524,7 +524,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"name\": \"Mateus castro\",\r\n        \"username\": \"tetz\",\r\n        \"email\": \"Ttukstro@april.com\",\r\n        \"address\": {\r\n            \"street\": \"Rua clovis\",\r\n            \"suite\": \"Apt. 204\",\r\n            \"city\": \"cachoeirinha\",\r\n            \"zipcode\": \"99998-3544\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        }\r\n}",
+							"raw": "{\r\n        \"name\": \"MAteus castro\",\r\n        \"username\": \"tetz\",\r\n        \"email\": \"Teste1245@april.biz\",\r\n        \"address\": {\r\n            \"street\": \"rua put\",\r\n            \"suite\": \"Apt. 500\",\r\n            \"city\": \"Cachoeirinha\",\r\n            \"zipcode\": \"96872-3874\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        },\r\n        \"phone\": \"9999999\",\r\n        \"website\": \"putteste.org\",\r\n        \"company\": {\r\n            \"name\": \"tezte-Crona\",\r\n            \"catchPhrase\": \"teste put\",\r\n            \"bs\": \"teste13245\"\r\n        }\r\n    } ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -532,7 +532,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://jsonplaceholder.typicode.com/users/10",
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
 							"protocol": "https",
 							"host": [
 								"jsonplaceholder",
@@ -541,7 +541,7 @@
 							],
 							"path": [
 								"users",
-								"10"
+								"1"
 							]
 						}
 					},

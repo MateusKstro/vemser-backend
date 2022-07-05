@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "33e2a275-73c0-4253-b8dc-16b1f70fd5b2",
+		"name": "homework1_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21782436"
+	},
+	"item": [
+		{
+			"name": "pessoa",
+			"item": [
+				{
+					"name": "pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"Mateus Castro\",\r\n        \"dataNascimento\": \"2001-09-14\",\r\n        \"cpf\": \"11335578941\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"Liz paula de Castro\",\r\n        \"dataNascimento\": \"1976-01-12\",\r\n        \"cpf\": \"11335578555\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa/5",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa/5",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contato",
+			"item": [
+				{
+					"name": "contato",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contatoPessoa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"idPessoa\": 4,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": \"55578876566\",\r\n        \"descricao\": \"whatsapp\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contato",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"99955876566\",\r\n    \"descricao\": \"whatsapp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contato",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

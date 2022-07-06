@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "ebf32db6-8d43-45ca-b5a5-a3404c50cad1",
+		"name": "Homework2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21782436"
+	},
+	"item": [
+		{
+			"name": "Contato",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contato",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contato"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ContatoPorIdPessoa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contato/byidpessoa?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contato",
+						"byidpessoa"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contato",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"numero\": 991878975,\r\n        \"descricao\": \"telefone\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contato",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contato"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contato",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": 95468775,\r\n        \"descricao\": \"fixo\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/contato/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contato",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contato",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contato/7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contato",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

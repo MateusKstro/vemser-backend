@@ -1,12 +1,13 @@
 package br.com.dbc.vemser.pessoaapi.repository;
 
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
+@Repository
 public class ContatoRepository {
 
     private static List<Contato> listaContato = new ArrayList<>();
@@ -29,38 +30,5 @@ public class ContatoRepository {
 
     public List<Contato> list() {
         return listaContato;
-    }
-
-    public Contato update(Integer id, Contato contatoAtualizar) throws Exception{
-        Contato contatoRecuperado = listaContato.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato nao encontrado"));
-        contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
-        contatoRecuperado.setTipoContato(contatoAtualizar.getTipoContato());
-        contatoRecuperado.setNumero(contatoAtualizar.getNumero());
-        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
-        return contatoRecuperado;
-    }
-
-    public void delete(Integer id) throws Exception {
-        Contato contatoDeletado = listaContato.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato nao encontrado"));
-        listaContato.remove(contatoDeletado);
-    }
-
-    public List<Contato> BuscarContatoPorIdPessoa(Integer id){
-        return listaContato.stream()
-                .filter(contato -> contato.getIdPessoa().equals(id))
-                .collect(Collectors.toList());
-    }
-
-    public Contato BuscarPorIdContato(Integer id) throws Exception {
-        return listaContato.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Conato nao encontrado"));
     }
 }

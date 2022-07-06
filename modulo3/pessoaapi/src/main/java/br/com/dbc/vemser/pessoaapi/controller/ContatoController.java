@@ -22,13 +22,14 @@ public class ContatoController {
     }
 
     @GetMapping("/byidpessoa")//localhost:8080/contato/byidpessoa?id=3
-    public List<Contato> BuscarContatoPorIdPessoa(@RequestParam("id") Integer id){
-        return contatoService.BuscarContatoPorIdPessoa(id);
+    public List<Contato> buscarContatoPorIdPessoa(@PathVariable("id") Integer id) throws Exception {
+        return contatoService.buscarContatoPorIdPessoa(id);
     }
 
-    @PostMapping // localhost:8080/contato
-    public Contato criarContato(@RequestBody Contato contato){
-        return contatoService.criarContato(contato);
+    @PostMapping("/{idPessoa}") // localhost:8080/contato
+    public Contato criarContato(@PathVariable("idPessoa") Integer id,
+                                @RequestBody Contato contato) throws Exception {
+        return contatoService.criarContato(id, contato);
     }
 
     @PutMapping("/{idContato}") //localhost:8080/contato/50

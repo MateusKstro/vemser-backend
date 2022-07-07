@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequestMapping("/contato") //localhost:8080/contato
 public class ContatoController {
 
+    @Autowired
     private ContatoService contatoService;
 
 
@@ -18,8 +20,8 @@ public class ContatoController {
         return contatoService.listarContatos();
     }
 
-    @GetMapping("/byidpessoa")//localhost:8080/contato/byidpessoa?id=3
-    public List<Contato> buscarContatoPorIdPessoa(@PathVariable("id") Integer id) throws Exception {
+    @GetMapping("/{idPessoa}")//localhost:8080/contato
+    public List<Contato> buscarContatoPorIdPessoa(@PathVariable("{idPessoa}") Integer id) throws Exception {
         return contatoService.buscarContatoPorIdPessoa(id);
     }
 

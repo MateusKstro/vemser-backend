@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,12 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 public class PessoaController {
-
+    @Autowired
     private PessoaService pessoaService;
-
-    public PessoaController() {
-        pessoaService = new PessoaService();
-    }
 
     @GetMapping("/hello") // localhost:8080/pessoa/hello
     public String hello() {

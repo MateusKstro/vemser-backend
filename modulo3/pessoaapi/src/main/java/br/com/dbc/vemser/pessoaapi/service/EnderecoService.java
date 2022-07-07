@@ -29,10 +29,7 @@ public class EnderecoService {
     }
 
     public Endereco buscarPorIdEndereco(Integer id) throws Exception {
-        return listarEnderecos().stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Id invalido"));
+        return findById(id);
     }
 
     public List<Endereco> buscarEnderecoPorIdPessoa(Integer id) throws Exception{
@@ -42,25 +39,17 @@ public class EnderecoService {
                 .collect(Collectors.toList());
     }
     public void verificarIdPessoa(Integer idPessoa) throws Exception{
-        pessoaService.list().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Id invalido"));
+        pessoaService.findById(idPessoa);
     }
 
     public Endereco criarEndereco(Integer id, Endereco endereco) throws Exception{
-        Pessoa pessoa = pessoaRepository.list().stream()
-                .filter(c -> c.getIdPessoa().equals(id))
-                .findFirst().orElseThrow(() -> new Exception("Pessoa nao encontrado"));
-        endereco.setIdPessoa(pessoa.getIdPessoa());
+        pessoaService.findById(id);
+        endereco.setIdPessoa(id);
         return enderecoRepository.create(endereco);
     }
 
     public Endereco atualizarEndereco(Integer id, Endereco enderecoAtulizado) throws Exception {
-        Endereco enderecoLocalizado = enderecoRepository.list().stream()
-                .filter(contato -> contato.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Endereco nao encontrado"));
+        Endereco enderecoLocalizado = findById(id);
         enderecoLocalizado.setIdPessoa(enderecoAtulizado.getIdPessoa());
         enderecoLocalizado.setTipo(enderecoAtulizado.getTipo());
         enderecoLocalizado.setLogradouro(enderecoAtulizado.getLogradouro());
@@ -74,10 +63,15 @@ public class EnderecoService {
     }
 
     public void deletar(Integer id) throws Exception{
-        Endereco enderecoDeletado = enderecoRepository.list().stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
+        Endereco enderecoDeletado = findById(id);
+        enderecoRepository.list().remove(enderecoDeletado);
+    }
+
+    public Endereco findById (Integer idEndereco) throws Exception{
+        Endereco enderecoLocalizado = enderecoRepository.list().stream()
+                .filter(contato -> contato.getIdEndereco().equals(idEndereco))
                 .findFirst()
                 .orElseThrow(() -> new Exception("Endereco nao encontrado"));
-        enderecoRepository.list().remove(enderecoDeletado);
+        return enderecoLocalizado;
     }
 }

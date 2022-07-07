@@ -5,12 +5,13 @@ import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@Service
 public class ContatoService {
 
 
@@ -22,10 +23,6 @@ public class ContatoService {
 
     @Autowired
     private ContatoRepository contatoRepository;
-
-    public ContatoService(){
-        contatoRepository = new ContatoRepository();
-    }
 
     public List<Contato> listarContatos(){
         return contatoRepository.list();

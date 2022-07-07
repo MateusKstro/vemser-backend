@@ -12,9 +12,6 @@ public class ContatoController {
 
     private ContatoService contatoService;
 
-    public ContatoController() {
-        contatoService = new ContatoService();
-    }
 
     @GetMapping//localhost:8080/contato
     public List<Contato> listarContatos(){

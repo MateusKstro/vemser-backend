@@ -29,18 +29,13 @@ public class ContatoService {
     }
 
     public void deletar(Integer id) throws Exception{
-        Contato contatoDeletado = contatoRepository.list().stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato nao encontrado"));
+        Contato contatoDeletado = findById(id);
         contatoRepository.list().remove(contatoDeletado);
     }
 
     public Contato criarContato(Integer id, Contato contato) throws Exception{
-        Pessoa pessoa = pessoaRepository.list().stream()
-                .filter(c -> c.getIdPessoa().equals(id))
-                .findFirst().orElseThrow(() -> new Exception("Pessoa nao encontrado"));
-        contato.setIdPessoa(pessoa.getIdPessoa());
+        pessoaService.findById(id);
+        contato.setIdPessoa(id);
         return contatoRepository.create(contato);
     }
 
@@ -52,17 +47,11 @@ public class ContatoService {
     }
 
     public void verificarIdPessoa(Integer idPessoa) throws Exception{
-        pessoaService.list().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Id invalido"));
+        pessoaService.findById(idPessoa);
     }
 
     public Contato atualizarContato(Integer id, Contato contatoAtualizado) throws Exception {
-        Contato contatoRecuperado = contatoRepository.list().stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato nao encontrado"));
+        Contato contatoRecuperado = findById(id);
         contatoRecuperado.setIdPessoa(contatoAtualizado.getIdPessoa());
         contatoRecuperado.setTipoContato(contatoAtualizado.getTipoContato());
         contatoRecuperado.setNumero(contatoAtualizado.getNumero());
@@ -70,4 +59,11 @@ public class ContatoService {
         return contatoRecuperado;
     }
 
+    public Contato findById(Integer id) throws Exception{
+        Contato contatoRecuperado = contatoRepository.list().stream()
+                .filter(contato -> contato.getIdContato().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Contato nao encontrado"));
+        return contatoRecuperado;
+    }
 }

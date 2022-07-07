@@ -69,7 +69,7 @@ public class EnderecoService {
 
     public Endereco findById (Integer idEndereco) throws Exception{
         Endereco enderecoLocalizado = enderecoRepository.list().stream()
-                .filter(contato -> contato.getIdEndereco().equals(idEndereco))
+                .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
                 .findFirst()
                 .orElseThrow(() -> new Exception("Endereco nao encontrado"));
         return enderecoLocalizado;

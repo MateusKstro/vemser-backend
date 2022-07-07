@@ -59,9 +59,9 @@ public class ContatoService {
         return contatoRecuperado;
     }
 
-    public Contato findById(Integer id) throws Exception{
+    public Contato findById(Integer idContato) throws Exception{
         Contato contatoRecuperado = contatoRepository.list().stream()
-                .filter(contato -> contato.getIdContato().equals(id))
+                .filter(contato -> contato.getIdContato().equals(idContato))
                 .findFirst()
                 .orElseThrow(() -> new Exception("Contato nao encontrado"));
         return contatoRecuperado;

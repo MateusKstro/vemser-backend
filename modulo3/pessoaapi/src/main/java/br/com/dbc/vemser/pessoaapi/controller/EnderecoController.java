@@ -4,8 +4,10 @@ package br.com.dbc.vemser.pessoaapi.controller;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,15 +32,15 @@ public class EnderecoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public Endereco postEndereco(@PathVariable("idPessoa") Integer id,
-                             @RequestBody Endereco endereco) throws Exception {
-        return enderecoService.criarEndereco(id, endereco);
+    public ResponseEntity<Endereco> create(@PathVariable("idPessoa") Integer idPessoa,
+                                          @Valid @RequestBody Endereco endereco) throws Exception {
+        return ResponseEntity.ok(enderecoService.criarEndereco(idPessoa, endereco));
     }
 
     @PutMapping("/{idEndereco}")
-    public Endereco updateEndereco(@PathVariable("idEndereco") Integer id,
-                          @RequestBody Endereco endereco) throws Exception{
-        return enderecoService.atualizarEndereco(id, endereco);
+    public ResponseEntity<Endereco> updateEndereco(@PathVariable("idEndereco") Integer idEndereco,
+                          @Valid @RequestBody Endereco endereco) throws Exception{
+        return ResponseEntity.ok(enderecoService.atualizarEndereco(idEndereco, endereco));
     }
 
     @DeleteMapping("/{idEndereco}")

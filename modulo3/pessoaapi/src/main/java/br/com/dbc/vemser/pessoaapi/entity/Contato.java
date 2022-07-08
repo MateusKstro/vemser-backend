@@ -1,14 +1,22 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+
+import javax.validation.constraints.*;
+
 public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
+
+    @NotNull
     private String tipoContato;
-    private Integer numero;
+    @NotEmpty
+    @Size (max = 13)
+    private String numero;
+    @NotEmpty
     private String descricao;
 
-    public Contato(Integer idContato, Integer idPessoa, String tipoContato, Integer numero, String descricao) {
+    public Contato(Integer idContato, Integer idPessoa, String tipoContato, String numero, String descricao) {
         this.idContato = idContato;
         this.idPessoa = idPessoa;
         this.tipoContato = tipoContato;
@@ -40,11 +48,11 @@ public class Contato {
         this.tipoContato = tipoContato;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

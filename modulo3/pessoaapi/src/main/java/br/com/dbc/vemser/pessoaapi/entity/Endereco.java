@@ -1,19 +1,34 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Endereco {
 
     private Integer idEndereco;
     private Integer idPessoa;
+    @NotNull
     private TipoEndereco tipo;
+    @NotEmpty
+    @Size(max = 250)
     private String logradouro;
-    private Integer numero;
+    @NotEmpty
+    private String numero;
     private String complemento;
+    @NotEmpty
+    @Size(max = 8)
     private String cep;
+    @NotBlank
+    @Size (max = 250)
     private String cidade;
+    @NotEmpty
     private String estado;
+    @NotEmpty
     private String pais;
 
-    public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
+    public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, String numero, String complemento, String cep, String cidade, String estado, String pais) {
         this.idEndereco = idEndereco;
         this.idPessoa = idPessoa;
         this.tipo = tipo;
@@ -58,11 +73,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

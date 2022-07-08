@@ -15,11 +15,11 @@ public class ContatoRepository {
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoRepository(){
-        listaContato.add(new Contato(COUNTER.incrementAndGet(), 1,"COMERCIAL", 991898146, "whatsapp"));
-        listaContato.add(new Contato(COUNTER.incrementAndGet(),2, "RESIDENCIAL", 778855443,"casa"));
-        listaContato.add(new Contato(COUNTER.incrementAndGet(), 3, "RESIDENCIAL",557789763, "whatsapp"));
-        listaContato.add(new Contato(COUNTER.incrementAndGet(), 4, "COMERCIAL",999889999, "whatsapp"));
-        listaContato.add(new Contato(COUNTER.incrementAndGet(), 5, "RESIDENCIAL",344878631,"casa"));
+        listaContato.add(new Contato(COUNTER.incrementAndGet(), 1,"COMERCIAL", "991898146", "whatsapp"));
+        listaContato.add(new Contato(COUNTER.incrementAndGet(),2, "RESIDENCIAL", "778855443","casa"));
+        listaContato.add(new Contato(COUNTER.incrementAndGet(), 3, "RESIDENCIAL","557789763", "whatsapp"));
+        listaContato.add(new Contato(COUNTER.incrementAndGet(), 4, "COMERCIAL","999889999", "whatsapp"));
+        listaContato.add(new Contato(COUNTER.incrementAndGet(), 5, "RESIDENCIAL","344878631","casa"));
     }
 
     public Contato create(Contato contato){

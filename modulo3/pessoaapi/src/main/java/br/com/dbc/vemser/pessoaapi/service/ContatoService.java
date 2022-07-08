@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ContatoService {
         contatoRepository.list().remove(contatoDeletado);
     }
 
-    public Contato criarContato(Integer id, Contato contato) throws Exception{
+    public Contato criarContato(Integer id, Contato contato) throws Exception {
         pessoaService.findById(id);
         contato.setIdPessoa(id);
         return contatoRepository.create(contato);
@@ -63,7 +64,7 @@ public class ContatoService {
         Contato contatoRecuperado = contatoRepository.list().stream()
                 .filter(contato -> contato.getIdContato().equals(idContato))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Contato nao encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Contato nao encontrado"));
         return contatoRecuperado;
     }
 }

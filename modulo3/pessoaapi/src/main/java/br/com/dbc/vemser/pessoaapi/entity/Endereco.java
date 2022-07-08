@@ -14,8 +14,8 @@ public class Endereco {
     @NotEmpty
     @Size(max = 250)
     private String logradouro;
-    @NotEmpty
-    private String numero;
+    @NotNull
+    private Integer numero;
     private String complemento;
     @NotEmpty
     @Size(max = 8)
@@ -23,12 +23,12 @@ public class Endereco {
     @NotBlank
     @Size (max = 250)
     private String cidade;
-    @NotEmpty
+    @NotNull
     private String estado;
-    @NotEmpty
+    @NotNull
     private String pais;
 
-    public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, String numero, String complemento, String cep, String cidade, String estado, String pais) {
+    public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
         this.idEndereco = idEndereco;
         this.idPessoa = idPessoa;
         this.tipo = tipo;
@@ -73,11 +73,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

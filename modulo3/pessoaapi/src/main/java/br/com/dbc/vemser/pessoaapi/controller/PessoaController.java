@@ -1,5 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +25,23 @@ public class PessoaController {
     }
 
     @PostMapping // localhost:8080/pessoa
-    public ResponseEntity<Pessoa> create(@Valid @RequestBody Pessoa pessoa) {
+    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoa) {
         return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
     @GetMapping // localhost:8080/pessoa
-    public List<Pessoa> list() {
-        return pessoaService.list();
+    public ResponseEntity<List<PessoaDTO>> list() {
+        return ResponseEntity.ok(pessoaService.list());
     }
 
     @GetMapping("/byname") // localhost:8080/pessoa/byname?nome=Rafa
-    public List<Pessoa> listByName(@RequestParam("nome") String nome) {
-        return pessoaService.listByName(nome);
+    public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
+        return ResponseEntity.ok(pessoaService.listByName(nome));
     }
 
     @PutMapping("/{idPessoa}") // localhost:8080/pessoa/7
-    public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id,
-                                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
+    public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id,
+                                         @Valid @RequestBody PessoaCreateDTO pessoaAtualizar) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
 

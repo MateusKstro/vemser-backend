@@ -22,7 +22,7 @@ public class ContatoRepository {
         listaContato.add(new Contato(COUNTER.incrementAndGet(), 5, "RESIDENCIAL","344878631","casa"));
     }
 
-    public Contato create(Contato contato){
+    public Contato create(Integer id, Contato contato){
         contato.setIdContato(COUNTER.incrementAndGet());
         listaContato.add(contato);
         return contato;

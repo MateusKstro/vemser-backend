@@ -1,10 +1,13 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,34 +15,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/endereco") //localhost:8080/endereco
+@Validated
 public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
     @GetMapping
-    public List<Endereco> listarEndereco(){
-        return enderecoService.listarEnderecos();
+    public ResponseEntity<List<EnderecoDTO>> listarEndereco(){
+        return ResponseEntity.ok(enderecoService.listarEnderecos());
     }
 
     @GetMapping("/{idEndereco}")
-    public Endereco buscarEnderecoPorId(@PathVariable("idEndereco") Integer id) throws Exception{
+    public EnderecoDTO buscarEnderecoPorId(@PathVariable("idEndereco") Integer id) throws Exception{
         return enderecoService.buscarPorIdEndereco(id);
     }
 
     @GetMapping("/{idPessoa}/pessoa")
-    public List<Endereco> buscarEnderecoPorPessoa(@PathVariable("idPessoa") Integer id) throws Exception {
-        return enderecoService.buscarEnderecoPorIdPessoa(id);
+    public ResponseEntity<List<EnderecoDTO>> buscarEnderecoPorPessoa(@PathVariable("idPessoa") Integer id) throws Exception {
+        return ResponseEntity.ok(enderecoService.buscarEnderecoPorIdPessoa(id));
     }
 
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<Endereco> create(@PathVariable("idPessoa") Integer idPessoa,
-                                          @Valid @RequestBody Endereco endereco) throws Exception {
+    public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer idPessoa,
+                                          @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception {
         return ResponseEntity.ok(enderecoService.criarEndereco(idPessoa, endereco));
     }
 
     @PutMapping("/{idEndereco}")
-    public ResponseEntity<Endereco> updateEndereco(@PathVariable("idEndereco") Integer idEndereco,
-                          @Valid @RequestBody Endereco endereco) throws Exception{
+    public ResponseEntity<EnderecoDTO> updateEndereco(@PathVariable("idEndereco") Integer idEndereco,
+                          @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception{
         return ResponseEntity.ok(enderecoService.atualizarEndereco(idEndereco, endereco));
     }
 

@@ -23,7 +23,7 @@ public class EnderecoRepository {
         enderecoList.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.RESIDENCIAL,"Rua tapajos",480,"Casa 246","168879321","Canoas","RS","BR"));
     }
 
-    public Endereco create(Endereco endereco){
+    public Endereco create(Integer id, Endereco endereco){
         endereco.setIdEndereco(COUNTER.incrementAndGet());
         enderecoList.add(endereco);
         return endereco;

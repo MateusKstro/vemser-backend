@@ -1,18 +1,20 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
-import br.com.dbc.vemser.pessoaapi.entity.Contato;
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
-import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Log
 @Service
 public class EnderecoService {
 
@@ -25,31 +27,41 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    public List<Endereco> listarEnderecos(){
-        return enderecoRepository.list();
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    public List<EnderecoDTO> listarEnderecos(){
+        log.info("listando enderecos");
+        return enderecoRepository.list().stream()
+                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Endereco buscarPorIdEndereco(Integer id) throws Exception {
-        return findById(id);
+    public EnderecoDTO buscarPorIdEndereco(Integer id) throws Exception {
+        return objectMapper.convertValue(findById(id), EnderecoDTO.class);
     }
 
-    public List<Endereco> buscarEnderecoPorIdPessoa(Integer id) throws Exception{
+    public List<EnderecoDTO> buscarEnderecoPorIdPessoa(Integer id) throws Exception{
+        log.info("Buscando por IdPessoa");
         verificarIdPessoa(id);
         return enderecoRepository.list().stream()
-                .filter(endereco -> endereco.getIdPessoa().equals(id))
+                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
                 .collect(Collectors.toList());
     }
     public void verificarIdPessoa(Integer idPessoa) throws Exception{
         pessoaService.findById(idPessoa);
     }
 
-    public Endereco criarEndereco(Integer id, Endereco endereco) throws Exception{
+    public EnderecoDTO criarEndereco(Integer id, EnderecoCreateDTO enderecoCriado) throws Exception{
+        log.info("criando endereco");
         pessoaService.findById(id);
-        endereco.setIdPessoa(id);
-        return enderecoRepository.create(endereco);
+        enderecoCriado.setIdPessoa(id);
+        Endereco endereco = objectMapper.convertValue(enderecoCriado, Endereco.class);
+        return objectMapper.convertValue(enderecoRepository.create(id, endereco), EnderecoDTO.class);
     }
 
-    public Endereco atualizarEndereco(Integer id, Endereco enderecoAtulizado) throws Exception {
+    public EnderecoDTO atualizarEndereco(Integer id, EnderecoCreateDTO enderecoAtulizado) throws Exception {
+        log.info("Atualizadno endereco");
         Endereco enderecoLocalizado = findById(id);
         enderecoLocalizado.setIdPessoa(enderecoAtulizado.getIdPessoa());
         enderecoLocalizado.setTipo(enderecoAtulizado.getTipo());
@@ -60,7 +72,7 @@ public class EnderecoService {
         enderecoLocalizado.setCidade(enderecoAtulizado.getCidade());
         enderecoLocalizado.setEstado(enderecoAtulizado.getEstado());
         enderecoLocalizado.setPais(enderecoAtulizado.getPais());
-        return enderecoLocalizado;
+        return objectMapper.convertValue(enderecoLocalizado, EnderecoDTO.class);
     }
 
     public void deletar(Integer id) throws Exception{

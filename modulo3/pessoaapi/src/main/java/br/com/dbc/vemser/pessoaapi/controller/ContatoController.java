@@ -1,7 +1,8 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
-import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,24 +22,24 @@ public class ContatoController {
 
 
     @GetMapping//localhost:8080/contato
-    public List<Contato> listarContatos(){
-        return contatoService.listarContatos();
+    public ResponseEntity<List<ContatoDTO>> listarContatos(){
+        return ResponseEntity.ok(contatoService.listarContatos());
     }
 
     @GetMapping("/{idPessoa}")//localhost:8080/contato
-    public List<Contato> buscarContatoPorIdPessoa(@PathVariable("{idPessoa}") Integer id) throws Exception {
-        return contatoService.buscarContatoPorIdPessoa(id);
+    public ResponseEntity<List<ContatoDTO>> buscarContatoPorIdPessoa(@PathVariable("{idPessoa}") Integer id) throws Exception {
+        return ResponseEntity.ok(contatoService.buscarContatoPorIdPessoa(id));
     }
 
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<Contato> create(@PathVariable("idPessoa") Integer idPessoa,
-                                          @Valid @RequestBody Contato contato) throws Exception {
+    public ResponseEntity<ContatoDTO> create(@PathVariable("idPessoa") Integer idPessoa,
+                                          @Valid @RequestBody ContatoCreateDTO contato) throws Exception {
         return ResponseEntity.ok(contatoService.criarContato(idPessoa, contato));
     }
 
     @PutMapping("/{idContato}") //localhost:8080/contato/50
-    public ResponseEntity<Contato> atualizarContato(@PathVariable("idContato") Integer idContato,
-                                    @Valid @RequestBody Contato contatoAtualizado) throws Exception {
+    public ResponseEntity<ContatoDTO> atualizarContato(@PathVariable("idContato") Integer idContato,
+                                    @Valid @RequestBody ContatoCreateDTO contatoAtualizado) throws Exception {
         return ResponseEntity.ok(contatoService.atualizarContato(idContato, contatoAtualizado));
     }
 

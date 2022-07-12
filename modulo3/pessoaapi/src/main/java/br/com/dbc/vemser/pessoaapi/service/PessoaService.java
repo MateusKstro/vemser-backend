@@ -24,10 +24,13 @@ public class PessoaService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public PessoaDTO create(PessoaCreateDTO pessoaCriado){
         log.info("Criando pessoa");
-        Pessoa pessoa = objectMapper.convertValue(pessoaCriado, Pessoa.class);
-        return objectMapper.convertValue(pessoaRepository.create(pessoa),PessoaDTO.class);
+        emailService.sendEmail(pessoaCriado, "create");
+        return objectMapper.convertValue(pessoaCriado, PessoaDTO.class);
     }
 
     public List<PessoaDTO> list(){
@@ -43,11 +46,15 @@ public class PessoaService {
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-        return objectMapper.convertValue(pessoaAtualizar, PessoaDTO.class);
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaAtualizar, PessoaDTO.class);
+        emailService.sendEmail(pessoaDTO, "update");
+        return pessoaDTO;
     }
 
     public void delete(Integer id) throws Exception {
         Pessoa pessoaRecuperada = findById(id);
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
+        emailService.sendEmail(pessoaDTO, "delete");
         pessoaRepository.list().remove(pessoaRecuperada);
     }
 

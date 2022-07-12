@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
@@ -30,6 +31,9 @@ public class EnderecoService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    EmailService emailService;
+
     public List<EnderecoDTO> listarEnderecos(){
         log.info("listando enderecos");
         return enderecoRepository.list().stream()
@@ -56,8 +60,9 @@ public class EnderecoService {
         log.info("criando endereco");
         pessoaService.findById(id);
         enderecoCriado.setIdPessoa(id);
-        Endereco endereco = objectMapper.convertValue(enderecoCriado, Endereco.class);
-        return objectMapper.convertValue(enderecoRepository.create(id, endereco), EnderecoDTO.class);
+        PessoaDTO pessoaEmail = objectMapper.convertValue(pessoaService.findById(id), PessoaDTO.class);
+        emailService.sendEmailWithAddress(pessoaEmail, enderecoCriado, "create");
+        return objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
     }
 
     public EnderecoDTO atualizarEndereco(Integer id, EnderecoCreateDTO enderecoAtulizado) throws Exception {
@@ -72,11 +77,17 @@ public class EnderecoService {
         enderecoLocalizado.setCidade(enderecoAtulizado.getCidade());
         enderecoLocalizado.setEstado(enderecoAtulizado.getEstado());
         enderecoLocalizado.setPais(enderecoAtulizado.getPais());
+        PessoaDTO pessoaEmail = objectMapper.convertValue(pessoaService.findById(id), PessoaDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(findById(id), EnderecoDTO.class);
+        emailService.sendEmailWithAddress(pessoaEmail, enderecoDTO, "update");
         return objectMapper.convertValue(enderecoLocalizado, EnderecoDTO.class);
     }
 
     public void deletar(Integer id) throws Exception{
         Endereco enderecoDeletado = findById(id);
+        PessoaDTO pessoaEmail = objectMapper.convertValue(pessoaService.findById(id), PessoaDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(findById(id), EnderecoDTO.class);
+        emailService.sendEmailWithAddress(pessoaEmail, enderecoDTO, "delete");
         enderecoRepository.list().remove(enderecoDeletado);
     }
 

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class PessoaDTO extends PessoaCreateDTO{
 
-    private Integer idEndereco;
+    private Integer idPessoa;
 }

@@ -93,7 +93,7 @@ public class EmailService {
     public String geContentFromTemplate(PessoaCreateDTO pessoa, String tipo) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
         dados.put("nome", pessoa.getNome());
-        dados.put("email", "mateus.castro@dbccompany.com.br");
+        dados.put("email", from);
         Template template;
         if(tipo.equalsIgnoreCase("create")){
             template = fmConfiguration.getTemplate("email-template.ftl");
@@ -135,14 +135,14 @@ public class EmailService {
         Map<String, Object> dados = new HashMap<>();
         dados.put("nome", pessoa.getNome());
         dados.put("id", pessoa.getIdPessoa());
-        dados.put("email", "mateus.castro@dbccompany.com.br");
+        dados.put("email", from);
         Template template;
         if(tipo =="create"){
-            template = fmConfiguration.getTemplate("email-template.ftl");
+            template = fmConfiguration.getTemplate("create-email-template.ftl");
         } else if(tipo == "update"){
-            template = fmConfiguration.getTemplate("email-template.ftl");
+            template = fmConfiguration.getTemplate("update-email-template.ftl");
         } else {
-            template = fmConfiguration.getTemplate("email-template.ftl");
+            template = fmConfiguration.getTemplate("delete-email-template.ftl");
         }
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;

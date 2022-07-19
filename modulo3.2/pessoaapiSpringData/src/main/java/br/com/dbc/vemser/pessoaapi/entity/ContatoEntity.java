@@ -22,7 +22,7 @@ public class ContatoEntity {
     private Integer idPessoa;
 
     @Column(name = "tipo")
-    private String tipoContato;
+    private TipoContato tipoContato;
 
     @Column(name = "numero")
     private String numero;

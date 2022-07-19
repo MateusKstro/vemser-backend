@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
+import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -12,7 +13,7 @@ public class ContatoCreateDTO {
     private Integer idPessoa;
 
     @NotNull
-    private String tipoContato;
+    private TipoContato tipoContato;
 
     @NotEmpty
     @Size(max = 13)

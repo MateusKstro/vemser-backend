@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Data
 public class EnderecoCreateDTO {
 
-
+    private Integer idPessoa;
     @NotNull
     private TipoEndereco tipo;
     @NotEmpty

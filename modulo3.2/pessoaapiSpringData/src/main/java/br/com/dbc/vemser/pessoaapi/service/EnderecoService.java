@@ -1,8 +1,11 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.dto.entity.EnderecoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
@@ -45,8 +48,10 @@ public class EnderecoService {
     }
 
 
-    public EnderecoDTO criarEndereco(Integer idPessoa, EnderecoCreateDTO enderecoCriado) throws Exception{
+    public EnderecoDTO criarEndereco(Integer id, EnderecoCreateDTO enderecoCriado) throws Exception{
         log.info("criando endereco");
+        pessoaService.findById(id);
+        enderecoCriado.setIdPessoa(id);
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoCriado, EnderecoEntity.class);
         return objectMapper.convertValue(enderecoRepository.save(enderecoEntity), EnderecoDTO.class);
     }
@@ -70,11 +75,9 @@ public class EnderecoService {
         enderecoRepository.delete(enderecoEntityDeletado);
     }
 
-    public EnderecoEntity findById (Integer idEndereco) throws Exception{
-        EnderecoEntity enderecoEntityLocalizado = enderecoRepository.findAll().stream()
-                .filter(enderecoEntity -> enderecoEntity.getIdEndereco().equals(idEndereco))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Endereco nao encontrado"));
-        return enderecoEntityLocalizado;
+    public EnderecoEntity findById (Integer id) throws Exception {
+        return enderecoRepository.findById(id)
+                .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado"));
     }
+
 }

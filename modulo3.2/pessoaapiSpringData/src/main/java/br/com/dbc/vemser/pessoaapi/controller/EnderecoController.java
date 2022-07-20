@@ -54,6 +54,7 @@ public class EnderecoController {
         return enderecoService.buscarPorIdEndereco(id);
     }
 
+
     @Operation(summary = "Criar novo endereco", description = "Cria um novo endereco e insere no banco de dados")
     @ApiResponses(
             value = {
@@ -64,7 +65,7 @@ public class EnderecoController {
             }
     )
     @Schema(description = "criando endereco")
-    @PostMapping
+    @PostMapping("/{idPessoa}")
     public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco,
                                               @RequestParam("idPessoa")Integer idPessoa) throws Exception {
         return ResponseEntity.ok(enderecoService.criarEndereco(idPessoa, endereco));
@@ -100,4 +101,5 @@ public class EnderecoController {
     public void delete(@PathVariable("idEndereco") Integer id) throws Exception {
         enderecoService.deletar(id);
     }
+
 }

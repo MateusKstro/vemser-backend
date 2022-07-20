@@ -3,6 +3,8 @@ package br.com.dbc.vemser.pessoaapi.service;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.entity.PessoaEntity;
+import br.com.dbc.vemser.pessoaapi.dto.entity.PetEntity;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
@@ -46,10 +48,11 @@ public class ContatoService {
 
     public ContatoDTO criarContato(Integer id, ContatoCreateDTO contatoCriado) throws RegraDeNegocioException {
         log.info("Criando contato");
-        pessoaService.findById(id);
+        PessoaEntity pessoaEntity = pessoaService.findById(id);
         contatoCriado.setIdPessoa(id);
-        ContatoEntity contatoEntity = objectMapper.convertValue(contatoCriado, ContatoEntity.class);
-        return objectMapper.convertValue(contatoRepository.save(contatoEntity), ContatoDTO.class);
+        ContatoEntity contato = objectMapper.convertValue(contatoCriado, ContatoEntity.class);
+        contato.setPessoaEntity(pessoaEntity);
+        return objectMapper.convertValue(contatoRepository.save(contato), ContatoDTO.class);
     }
 
     public List<ContatoDTO> buscarContatoPorIdPessoa(Integer id) throws RegraDeNegocioException{
@@ -75,11 +78,8 @@ public class ContatoService {
         return objectMapper.convertValue(contatoRepository.save(contatoEntityRecuperado), ContatoDTO.class);
     }
 
-    public ContatoEntity findById(Integer idContato) throws RegraDeNegocioException{
-        ContatoEntity contatoEntityRecuperado = contatoRepository.findAll().stream()
-                .filter(contatoEntity -> contatoEntity.getIdContato().equals(idContato))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Contato nao encontrado"));
-        return contatoEntityRecuperado;
+    public ContatoEntity findById (Integer idContato)throws RegraDeNegocioException {
+        return contatoRepository.findById(idContato)
+                .orElseThrow(() -> new RegraDeNegocioException("Pet não econtrada"));
     }
 }

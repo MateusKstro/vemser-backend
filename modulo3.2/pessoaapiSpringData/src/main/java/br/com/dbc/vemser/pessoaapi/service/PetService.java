@@ -3,6 +3,7 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.dto.PetCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
+import br.com.dbc.vemser.pessoaapi.dto.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.dto.entity.PetEntity;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.PetRepository;
@@ -36,9 +37,10 @@ public class PetService {
 
     public PetDTO criarPet(Integer id, PetCreateDTO petCriado) throws RegraDeNegocioException {
         log.info("Criando Pet");
-        pessoaService.findById(id);
+        PessoaEntity pessoaEntity = pessoaService.findById(id);
         petCriado.setIdPessoa(id);
         PetEntity petEntity = objectMapper.convertValue(petCriado, PetEntity.class);
+        petEntity.setPessoaEntity(pessoaEntity);
         return objectMapper.convertValue(petRepository.save(petEntity), PetDTO.class);
     }
 
@@ -57,11 +59,8 @@ public class PetService {
         petRepository.delete(petEntityDeletado);
     }
 
-    public PetEntity findById(Integer idPet) throws RegraDeNegocioException{
-        PetEntity petEntityRecuperado = petRepository.findAll().stream()
-                .filter(contatoEntity -> contatoEntity.getIdPet().equals(idPet))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Pet nao encontrado"));
-        return petEntityRecuperado;
+    public PetEntity findById (Integer idPet)throws RegraDeNegocioException {
+        return petRepository.findById(idPet)
+                .orElseThrow(() -> new RegraDeNegocioException("Pet não econtrada"));
     }
 }

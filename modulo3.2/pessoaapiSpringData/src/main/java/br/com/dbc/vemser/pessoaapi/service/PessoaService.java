@@ -47,14 +47,11 @@ public class PessoaService {
         pessoaEntityRecuperada.setEmail(pessoaAtualizar.getEmail());
         pessoaEntityRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaEntityRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-        PessoaEntity pessoaEntity = objectMapper.convertValue(pessoaEntityRecuperada, PessoaEntity.class);
-        return objectMapper.convertValue(pessoaRepository.save(pessoaEntity), PessoaDTO.class);
+        return objectMapper.convertValue(pessoaRepository.save(pessoaEntityRecuperada), PessoaDTO.class);
     }
 
     public void delete(Integer id) throws Exception {
         PessoaEntity pessoaEntityRecuperada = findById(id);
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntityRecuperada, PessoaDTO.class);
-        emailService.sendEmail(pessoaDTO, "delete");
         pessoaRepository.delete(pessoaEntityRecuperada);
     }
 
@@ -142,10 +139,7 @@ public class PessoaService {
 
 
     public PessoaEntity findById (Integer idPessoa)throws RegraDeNegocioException {
-        PessoaEntity pessoaEntityRecuperada = pessoaRepository.findAll().stream()
-                .filter(pessoaEntity -> pessoaEntity.getIdPessoa().equals(idPessoa))
-                .findFirst()
+        return pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não econtrada"));
-        return pessoaEntityRecuperada;
     }
 }

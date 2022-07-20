@@ -1,7 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.dto.*;
+import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,6 +21,9 @@ import java.util.List;
 public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
 
     @Operation(summary = "Criar nova pessoa", description = "Cria uma nova pessoa e insere no banco de dados")
@@ -53,21 +56,29 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.list());
     }
 
-    @Operation(summary = "Listar pessoa por nome", description = "Lista uma pessoa por nome vinda do banco de dados!")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas"),
-                    @ApiResponse(responseCode = "400", description = "Pessoa nao existe"),
-                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
-            }
-    )
-    @Schema(description = "Listando uma pessoa")
-    @GetMapping("/byname") // localhost:8080/pessoa/byname?nome=Rafa
-    public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
-        return ResponseEntity.ok(pessoaService.listByName(nome));
+//    @GetMapping("/byname")
+//    public List<PessoaEntity> listByName(@RequestParam("nome") String nome) { // apenas para fins academicos nao utilizar Repository na Controller
+//        return pessoaRepository.findByNomeContainsIgnoreCase(nome);
+//    }
+
+//    @GetMapping("/getByCpf")
+//    public List<PessoaEntity> listByCpf(@RequestParam("cpf") String cpf) { //apenas para fins academicos nao utilizar Repository na Controller
+//        return pessoaRepository.findByCpf(cpf);
+//    }
+    @GetMapping("/getListPessoasComContatos")
+    public List<PessoaDTOComContatos> listarPessoasComContatos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return pessoaService.listarPessoasComContatos(id);
     }
 
+    @GetMapping("/getListPessoasComEnderecos")
+    public List<PessoaDTOComEnderecos> listarPessoasComEnderecos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return pessoaService.listarPessoasComEnderecos(id);
+    }
+
+    @GetMapping("/getListPessoasComPets")
+    public List<PessoaDTOComPets> listarPessoasComPets(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return pessoaService.listarPessoasComPets(id);
+    }
     @Operation(summary = "Editar pessoa", description = "Edita uma nova pessoa e mantém ela no banco de dados")
     @ApiResponses(
             value = {
@@ -83,6 +94,8 @@ public class PessoaController {
                                          @Valid @RequestBody PessoaCreateDTO pessoaAtualizar) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
+
+
 
     @Operation(summary = "Deletar pessoa", description = "Deleta uma nova pessoa do banco de dados")
     @ApiResponses(

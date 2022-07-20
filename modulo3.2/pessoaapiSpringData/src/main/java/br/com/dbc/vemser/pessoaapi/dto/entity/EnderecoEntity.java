@@ -1,8 +1,10 @@
-package br.com.dbc.vemser.pessoaapi.entity;
+package br.com.dbc.vemser.pessoaapi.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +43,9 @@ public class EnderecoEntity {
     @Column(name = "pais")
     private String pais;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<PessoaEntity> pessoas;
 
 }
 

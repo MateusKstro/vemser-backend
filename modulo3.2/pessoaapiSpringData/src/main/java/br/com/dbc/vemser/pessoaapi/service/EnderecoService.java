@@ -2,9 +2,7 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
-import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
@@ -47,7 +45,7 @@ public class EnderecoService {
     }
 
 
-    public EnderecoDTO criarEndereco(EnderecoCreateDTO enderecoCriado) throws Exception{
+    public EnderecoDTO criarEndereco(Integer idPessoa, EnderecoCreateDTO enderecoCriado) throws Exception{
         log.info("criando endereco");
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoCriado, EnderecoEntity.class);
         return objectMapper.convertValue(enderecoRepository.save(enderecoEntity), EnderecoDTO.class);

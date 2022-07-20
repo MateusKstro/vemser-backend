@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -64,8 +65,9 @@ public class EnderecoController {
     )
     @Schema(description = "criando endereco")
     @PostMapping
-    public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco) throws Exception {
-        return ResponseEntity.ok(enderecoService.criarEndereco(endereco));
+    public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco,
+                                              @RequestParam("idPessoa")Integer idPessoa) throws Exception {
+        return ResponseEntity.ok(enderecoService.criarEndereco(idPessoa, endereco));
     }
 
     @Operation(summary = "Editar endereco", description = "Edita um endereco e mantém no banco de dados")

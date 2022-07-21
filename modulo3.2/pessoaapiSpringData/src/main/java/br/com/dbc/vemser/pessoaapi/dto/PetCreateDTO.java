@@ -1,6 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
-import br.com.dbc.vemser.pessoaapi.dto.entity.TipoPet;
+import br.com.dbc.vemser.pessoaapi.entity.TipoPet;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

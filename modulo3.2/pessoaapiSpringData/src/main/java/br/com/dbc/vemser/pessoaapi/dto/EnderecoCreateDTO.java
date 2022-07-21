@@ -1,7 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
 
-import br.com.dbc.vemser.pessoaapi.dto.entity.TipoEndereco;
+import br.com.dbc.vemser.pessoaapi.entity.TipoEndereco;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

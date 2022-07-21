@@ -1,4 +1,4 @@
-package br.com.dbc.vemser.pessoaapi.dto.entity;
+package br.com.dbc.vemser.pessoaapi.entity;
 
 
 
@@ -8,7 +8,7 @@ public enum TipoPet {
 
     CACHORRO(1),
     GATO(2),
-    ROEDOR(3);
+    GUAXINIM(3);
 
     private Integer tipo;
 

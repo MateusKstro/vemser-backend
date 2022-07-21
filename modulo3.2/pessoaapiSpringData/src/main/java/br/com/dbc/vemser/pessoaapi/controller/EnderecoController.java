@@ -3,6 +3,11 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
+import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
+import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
+import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,6 +28,9 @@ import java.util.List;
 public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @Operation(summary = "Listar endereco", description = "Lista todos os enderecos do banco")
     @ApiResponses(
@@ -83,7 +91,7 @@ public class EnderecoController {
     @Schema(description = "Editando um endereco")
     @PutMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> updateEndereco(@PathVariable("idEndereco") Integer idEndereco,
-                          @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception{
+                          @Valid @RequestBody EnderecoDTO endereco) throws Exception{
         return ResponseEntity.ok(enderecoService.atualizarEndereco(idEndereco, endereco));
     }
 

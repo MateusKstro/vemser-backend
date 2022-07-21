@@ -2,6 +2,9 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
+import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,6 +25,9 @@ public class ContatoController {
 
     @Autowired
     private ContatoService contatoService;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
 
 
     @Operation(summary = "Listar contatos", description = "Lista todos os contatos do banco")
@@ -99,5 +105,12 @@ public class ContatoController {
     @DeleteMapping("/{idContato}") //localhost:8080/contato/50
     public void deletar(@PathVariable("idContato") Integer id) throws Exception{
         contatoService.deletar(id);
+    }
+
+    @GetMapping("/tipoContato")
+    public List<ContatoEntity> getContatoPorTipo(TipoContato tipoContato){ // apenas para afins academicos nao utilizar Repository na Controller
+        List<ContatoEntity> contatoEntities = contatoRepository
+                .getContatoPorTipo(tipoContato);
+         return contatoEntities;
     }
 }

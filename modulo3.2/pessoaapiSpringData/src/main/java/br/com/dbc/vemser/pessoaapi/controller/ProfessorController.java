@@ -1,6 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.dto.entity.ProfessorEntity;
+import br.com.dbc.vemser.pessoaapi.entity.ProfessorEntity;
 import br.com.dbc.vemser.pessoaapi.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

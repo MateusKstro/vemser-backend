@@ -6,4 +6,6 @@ import lombok.Data;
 public class EnderecoDTO extends EnderecoCreateDTO{
 
     private Integer idEndereco;
+
+    private Integer idPessoa;
 }

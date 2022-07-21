@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.*;
+import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,19 +66,35 @@ public class PessoaController {
 //    public List<PessoaEntity> listByCpf(@RequestParam("cpf") String cpf) { //apenas para fins academicos nao utilizar Repository na Controller
 //        return pessoaRepository.findByCpf(cpf);
 //    }
+//    @GetMapping("/cpf")
+//    public List<PessoaEntity> getPessoaByCpf(String cpf){ // apenas para afins academicos nao utilizar Repository na Controller
+//         return pessoaRepository.listPessoaByCpf(cpf);
+//    }
+
+
+    @GetMapping("/pessoa-relatorio")
+    public List<PessoaRelatorioDTO> listarRelatorio(@RequestParam(value = "id", required = false) Integer id) throws Exception{
+        return pessoaService.listarRelatorio(id);
+    }
+
+    @GetMapping("/pessoa-completa")
+    public List<PessoaCompletaDTO> listarPessoasCompletas(@RequestParam(value = "id", required = false) Integer id) throws Exception{
+        return pessoaService.getPessoaCompleta(id);
+    }
+
     @GetMapping("/getListPessoasComContatos")
-    public List<PessoaDTOComContatos> listarPessoasComContatos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
-        return pessoaService.listarPessoasComContatos(id);
+    public ResponseEntity<List<PessoaDTOComContatos>> listarPessoasComContatos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return ResponseEntity.ok(pessoaService.listarPessoasComContatos(id));
     }
 
     @GetMapping("/getListPessoasComEnderecos")
-    public List<PessoaDTOComEnderecos> listarPessoasComEnderecos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
-        return pessoaService.listarPessoasComEnderecos(id);
+    public ResponseEntity<List<PessoaDTOComEnderecos>> listarPessoasComEnderecos(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return ResponseEntity.ok(pessoaService.listarPessoasComEnderecos(id));
     }
 
     @GetMapping("/getListPessoasComPets")
-    public List<PessoaDTOComPets> listarPessoasComPets(@RequestParam(value = "id", required = false) Integer id) throws Exception {
-        return pessoaService.listarPessoasComPets(id);
+    public ResponseEntity<List<PessoaDTOComPets>> listarPessoasComPets(@RequestParam(value = "id", required = false) Integer id) throws Exception {
+        return ResponseEntity.ok(pessoaService.listarPessoasComPets(id));
     }
     @Operation(summary = "Editar pessoa", description = "Edita uma nova pessoa e mantém ela no banco de dados")
     @ApiResponses(

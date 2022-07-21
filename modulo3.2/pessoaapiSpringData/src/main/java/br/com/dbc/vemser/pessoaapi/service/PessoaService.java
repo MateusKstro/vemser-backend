@@ -1,10 +1,11 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.dto.*;
-import br.com.dbc.vemser.pessoaapi.dto.entity.PessoaEntity;
+import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -116,24 +118,68 @@ public class PessoaService {
     }
 
     public List<PessoaDTOComPets> listarPessoasComPets(Integer idPessoa) throws Exception {
-        List<PessoaDTOComPets> listPessoasDTOComPets = new ArrayList<>();
         if (idPessoa == null) {
-            listPessoasDTOComPets.addAll(pessoaRepository.findAll().stream()
+            return pessoaRepository.findAll().stream()
                     .map(pessoa -> {
                         PessoaDTOComPets pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTOComPets.class);
                         pessoaDTO.setPets(objectMapper.convertValue(pessoa.getPets(), PetDTO.class));
                         return pessoaDTO;
-                    }).toList()
-            );
+                    }).toList();
+
         }
         else {
-            PessoaEntity pessoaEntity = pessoaRepository.findById(idPessoa)
-                    .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
-            PessoaDTOComPets pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTOComPets.class);
-            pessoaDTO.setPets(objectMapper.convertValue(pessoaEntity.getPets(), PetDTO.class));
-            listPessoasDTOComPets.add(pessoaDTO);
+            return pessoaRepository.findById(idPessoa).stream()
+                    .map(pessoa -> {
+                        PessoaDTOComPets pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTOComPets.class);
+                        pessoaDTO.setPets(objectMapper.convertValue(pessoa.getPets(), PetDTO.class));
+                        return pessoaDTO;
+                    }).toList();
         }
-        return listPessoasDTOComPets;
+    }
+
+    public List<PessoaCompletaDTO> getPessoaCompleta(Integer idPessoa) throws Exception {
+        if(idPessoa == null) {
+            return new ArrayList<>(pessoaRepository.findAll().stream()
+                    .map(this::retornarDadosPessoas)
+                    .toList());
+        } else {
+            return new ArrayList<>(pessoaRepository.findById(idPessoa).stream()
+                    .map(this::retornarDadosIdPessoa)
+                    .toList());
+        }
+    }
+
+    private PessoaCompletaDTO retornarDadosIdPessoa(PessoaEntity pessoaEntity){
+        Optional<PessoaEntity> pessoa = pessoaRepository.findById(pessoaEntity.getIdPessoa());
+        PessoaCompletaDTO pessoaCompletaDTO = objectMapper.convertValue(pessoa, PessoaCompletaDTO.class);
+        pessoaCompletaDTO.setContatos(pessoaEntity.getContatos().stream()
+                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class))
+                .collect(Collectors.toList())
+        );
+        pessoaCompletaDTO.setEnderecos(pessoaEntity.getEnderecos().stream()
+                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
+                .collect(Collectors.toList())
+        );
+        pessoaCompletaDTO.setPets(objectMapper.convertValue(pessoaEntity.getPets(), PetDTO.class));
+        return pessoaCompletaDTO;
+    }
+
+    private PessoaCompletaDTO retornarDadosPessoas(PessoaEntity pessoaEntity){
+        PessoaCompletaDTO pessoaCompletaDTO = objectMapper.convertValue(pessoaEntity, PessoaCompletaDTO.class);
+        pessoaCompletaDTO.setContatos(pessoaEntity.getContatos().stream()
+                .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class))
+                .collect(Collectors.toList())
+        );
+        pessoaCompletaDTO.setEnderecos(pessoaEntity.getEnderecos().stream()
+                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
+                .collect(Collectors.toList())
+        );
+        pessoaCompletaDTO.setPets(objectMapper.convertValue(pessoaEntity.getPets(), PetDTO.class));
+        return pessoaCompletaDTO;
+    }
+
+    public List<PessoaRelatorioDTO> listarRelatorio(Integer id){
+        return pessoaRepository.listaRelatorio(id);
     }
 
 

@@ -1,4 +1,4 @@
-package br.com.dbc.vemser.pessoaapi.dto.entity;
+package br.com.dbc.vemser.pessoaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -44,7 +44,10 @@ public class EnderecoEntity {
     private String pais;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "enderecos")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "Pessoa_X_Pessoa_Endereco",
+            joinColumns = @JoinColumn(name = "id_endereco"),
+            inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
     private Set<PessoaEntity> pessoas;
 
 }

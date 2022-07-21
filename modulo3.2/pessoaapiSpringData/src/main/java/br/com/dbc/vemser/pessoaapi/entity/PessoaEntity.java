@@ -1,4 +1,4 @@
-package br.com.dbc.vemser.pessoaapi.dto.entity;
+package br.com.dbc.vemser.pessoaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

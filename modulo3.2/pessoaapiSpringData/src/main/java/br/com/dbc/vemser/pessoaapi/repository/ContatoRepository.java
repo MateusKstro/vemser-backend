@@ -1,9 +1,12 @@
 package br.com.dbc.vemser.pessoaapi.repository;
 
 
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
 import feign.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +23,7 @@ public interface ContatoRepository extends JpaRepository<ContatoEntity, Integer>
     List<ContatoEntity> getContatoPorTipo(@Param("tipoContato") TipoContato tipoContato);
 
 
+    @Query(value = " select ctt" +
+            " from CONTATO ctt")
+    Page<ContatoEntity> findContatoPaginado(String descricao, Pageable pageable);
 }

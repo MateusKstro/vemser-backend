@@ -1,3 +1,5 @@
+package homeworkDatas1;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -26,8 +28,6 @@ public class DatasEx1 {
             Period period = Period.between(dataAtual, dataAniversario.withYear(dataAtual.getYear() + 1));
             System.out.println("Faltam " + period.getDays() + " dias e " + period.getMonths() + " meses para seu próximo aniversario!");
         }
-        System.out.println();
-        System.out.println("------------------------------------------------------------------");
 
     }
 

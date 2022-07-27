@@ -6,6 +6,10 @@ import br.com.dbc.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.security.TokenService;
 import br.com.dbc.vemser.pessoaapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,14 +29,23 @@ public class AuthController {
 
     private final TokenService tokenService;
 
+    private final AuthenticationManager authenticationManager;
+
 
     @PostMapping
     public String auth(@RequestBody @Valid LoginDTO login) throws RegraDeNegocioException{
-        Optional<UsuarioEntity> optionalUsuario = usuarioService.findByLoginAndSenha(login.getLogin(), login.getSenha());
-        if(optionalUsuario.isPresent()){
-            String token = tokenService.getToken(optionalUsuario.get());
-            return token;
-        }
-        throw new RegraDeNegocioException("Usuario ou senha invaalidos.");
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                     login.getLogin(),
+                     login.getSenha()
+                );
+
+        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        String token = tokenService.getToken(authentication);
+        return token;
+    }
+    @PostMapping("/cadastro")
+    public ResponseEntity<LoginDTO> cadastro(@RequestBody @Valid LoginDTO loginDTO){
+        return ResponseEntity.ok(usuarioService.cadastro(loginDTO));
     }
 }

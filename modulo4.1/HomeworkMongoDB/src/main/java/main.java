@@ -4,6 +4,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import org.bson.Document;
 
 import java.util.Arrays;
@@ -105,11 +106,20 @@ public class main {
 //                group("$nome", Accumulators.sum("sumQuantity", "$id_usuario"))))
 //                        .forEach(doc -> System.out.println(doc.toJson()));
 
-        clientes.aggregate(Arrays.asList(
-                        match(new Document("valor_pagamento", 300)
-                                .append("nome", new Document("$nin", Arrays.asList("Guile")))),
-                        group("$nome", Accumulators.sum("sumQuantity", "$id_usuario"))))
-                .forEach(doc -> System.out.println(doc.toJson()));
+//        clientes.aggregate(Arrays.asList(
+//                        match(new Document("valor_pagamento", 300)
+//                                .append("nome", new Document("$nin", Arrays.asList("Guile")))),
+//                        group("$nome", Accumulators.sum("sumQuantity", "$id_usuario"))))
+//                .forEach(doc -> System.out.println(doc.toJson()));
+
+
+//        pets.find().projection(Projections.exclude("_id","nome","tipo","porte"))
+//                        .iterator()
+//                        .forEachRemaining(System.out::println);
+
+//        clientes.find().projection(Projections.exclude("_id","nome","email","id_usuario"))
+//                        .iterator()
+//                        .forEachRemaining(System.out::println);
 
         mongoClient.close();
     }

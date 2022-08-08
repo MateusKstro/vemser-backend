@@ -103,13 +103,13 @@ public class main {
         //aggregate
 //        clientes.aggregate(Arrays.asList(
 //                match(Filters.eq("valor_pagamento", 300)),
-//                group("$nome", Accumulators.sum("sumQuantity", "$id_usuario"))))
+//                group("$nome", Accumulators.sum("id_usuario", "$id_usuario"))))
 //                        .forEach(doc -> System.out.println(doc.toJson()));
 
 //        clientes.aggregate(Arrays.asList(
 //                        match(new Document("valor_pagamento", 300)
 //                                .append("nome", new Document("$nin", Arrays.asList("Guile")))),
-//                        group("$nome", Accumulators.sum("sumQuantity", "$id_usuario"))))
+//                        group("$nome", Accumulators.sum("id_usuaario", "$id_usuario"))))
 //                .forEach(doc -> System.out.println(doc.toJson()));
 
 

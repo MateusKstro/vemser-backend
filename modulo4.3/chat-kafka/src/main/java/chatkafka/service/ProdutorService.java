@@ -19,7 +19,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -27,7 +26,8 @@ import java.util.UUID;
 @Slf4j
 public class ProdutorService {
 
-    private static final String MEU_USUARIO = "castro";
+    @Value("${kafka.client-id}")
+    private String clientId;
 
     private static final LocalDateTime DATA_ATUAL = LocalDateTime.now();
 
@@ -36,7 +36,7 @@ public class ProdutorService {
 
     public void enviarMensagem(String mensagem, List<Chats> chatsList) throws JsonProcessingException{
         MensagemDTO mensagemDTO =  MensagemDTO.builder()
-                .usuario(MEU_USUARIO)
+                .usuario(clientId)
                 .mensagem(mensagem)
                 .dataCriacao(DATA_ATUAL).build();
         String payload = objectMapper.writeValueAsString(mensagemDTO);
